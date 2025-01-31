@@ -3,37 +3,46 @@
 
 <br>
 <div class="container">
-    <div class="row">
-        <center>
-            <div class="col-8">
-                <p align="justify">
-                Hi there! I'm Aditya Goswami, a passionate tech enthusiast, Python developer, and electrical engineering student with a 
-                knack for creating innovative solutions. My journey into the world of engineering and technology has been an exciting
-                blend of learning, experimentation, and personal growth. As I pursue my BTech in Electrical Engineering,
-                I’ve developed a strong foundation in coding, problem-solving, and applying technical knowledge to real-world scenarios.
-                <br></br>
-                When I'm not coding or experimenting with dielectric materials, you can find me exploring creative avenues. I was the 
-                co-founder of Blissful Moments Candles, where I discovered the art of blending passion with entrepreneurship.
-                <br></br>
-                My love for technology extends to programming, where I thrive on building creative and functional projects. 
-                Beyond coding, I’m a creative soul who finds inspiration in sketching. For me, sketching is more than just 
-                a hobby—it’s a way to express emotions and capture the beauty of the world around me. With every pencil stroke, 
-                I aim to bring ideas to life on paper, whether it’s a realistic portrait or an imaginative design.
-                <br></br>
-                When I’m not immersed in tech or art, I’m out on my motorcycle, chasing the thrill of the open road. Riding offers 
-                me a sense of freedom and adventure, allowing me to explore new places and connect with the world in a unique way. 
-                Additionally, I enjoy playing basketball, where I not only get to stay active but also embrace the teamwork and 
-                excitement of the game.
-                <br></br>
-                This blog is a reflection of my passions, experiences, and aspirations. It’s a space where I share my journey, 
-                dive into the intersection of creativity and technology, and connect with like-minded individuals. Whether you’re 
-                here for insights, inspiration, or just a good read, I’m thrilled to have you along for the ride.
-                </p>
+    <div class="card mb-3" >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <center>
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+               {% if product.is_sale %}
+               
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                            <!-- Sale -->
+                             <!-- <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+                                <div class="bi-star-fill"></div>
+                             </div> -->
+                            <!-- Product price-->
+                            <strike>
+                                Rs. {{ product.price }}
+                            </strike>
+                            <br/>
+                             Rs. {{ product.sale_price }}
+               {% else %}
+                    Rs. {{ product.price }}
+               {% endif %}
+              </center>
             </div>
-
-        </center>
-    </div>
+          </div>
+        </div>
+      </div>
 </div>
 <br></br>
+<br></br><br></br><br></br><br></br>
 
 {% endblock %} 
