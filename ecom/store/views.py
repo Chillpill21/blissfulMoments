@@ -52,4 +52,4 @@ def register_user(request):
             messages.success(request, ('Whoops! There was a problem registering please try again!'))
             return redirect('register')
     else:
-        return render(request, 'register.html', {})
+        return render(request, 'register.html', {'form': form})
