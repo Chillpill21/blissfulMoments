@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 from django import forms
 
 def index(request):
@@ -35,5 +36,20 @@ def logout_user(request):
     return redirect('index')
 
 def register_user(request):
-
-    return render(request, 'register.html', {})
+    form  = SignUpForm()
+    if request.method == 'POST':
+        form  = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            #log in user
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("You have Registered successfully"))
+            return redirect('index')
+        else:
+            messages.success(request, ('Whoops! There was a problem registering please try again!'))
+            return redirect('register')
+    else:
+        return render(request, 'register.html', {})
