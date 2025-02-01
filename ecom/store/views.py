@@ -12,10 +12,10 @@ def category(request, foo):
     foo = foo.replace('-',' ')
     try:
         category = Category.objects.get(name=foo)
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(catregory=category)
         return render(request,'category.html', {'products':products, 'category':category})
     except:
-        messages.success(request, ("There Category does not exist please try again."))
+        messages.success(request, ("The Category does not exist please try again."))
         return redirect('index')
 
 def product(request, pk):
