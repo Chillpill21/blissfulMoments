@@ -35,7 +35,9 @@
                              Rs. {{ product.sale_price }}
                {% else %}
                     Rs. {{ product.price }}
+                    <!-- <br/>ID: {{ product.id }} -->
                {% endif %}
+               <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add To Cart</button>
               </center>
             </div>
           </div>
