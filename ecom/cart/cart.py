@@ -1,4 +1,4 @@
-from store.models import Products
+from store.models import Product
 
 
 class Cart():
@@ -29,6 +29,6 @@ class Cart():
         # Get ids from cart
         product_ids = self.cart.keys()
         # Use ids to lookup products in database model
-        products = Products.objects.filter(id_in=product_ids)
+        products = Product.objects.filter(id__in=product_ids)
 
         return products

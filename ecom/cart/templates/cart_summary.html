@@ -10,5 +10,13 @@
                 </div>
             </div>
         </header>
+        <br>
+        <div class="container">
+            <!-- {{ cart_products }} -->
+            {% for product in cart_products %}
+                {{ product }} {{ product.price }}<br>
+            {% endfor %}
+        </div>
+        
 <br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}        
