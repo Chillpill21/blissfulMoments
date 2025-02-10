@@ -85,6 +85,8 @@
               </div><br>
 
             {% endfor %}
+        <h3>Total: Rs.{{ totals }}</h3>
+        <br><br><br>
         {% else %}
         There's Nothing In Your Cart
         <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -105,7 +107,7 @@ $(document).on('click', '.update-cart', function(e){
       url: '{% url "cart_update" %}',
       data: {
         product_id: $(this).data('index'),
-        product_qty: $('#select' + productid + 'option:selected').text(),
+        product_qty: $('#select' + productid + ' option:selected').text(),
         csrfmiddlewaretoken: '{{ csrf_token }}',
         action: 'post'
       },
