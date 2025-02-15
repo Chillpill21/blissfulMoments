@@ -8,6 +8,9 @@ from .forms import SignUpForm
 from django import forms
 
 
+def category_summary(request):
+    return render(request, 'category_summary.html', {})
+
 def category(request, foo):
     foo = foo.replace('-',' ')
     try:
