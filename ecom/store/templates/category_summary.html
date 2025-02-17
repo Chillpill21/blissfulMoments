@@ -14,7 +14,10 @@
     <div class="row">
         <center>
             <div class="col-8">
-                
+                <!-- {{ categories }} -->
+                {% for category in categories %}
+                <h3><a href="{% url 'category' category %}">{{ category }}</a></h3>
+                {% endfor %}
             </div>
 
         </center>
