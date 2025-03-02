@@ -13,11 +13,39 @@
 <div class="container">
     <div class="row">
         <center>
-           
+            <div class="col-10">
+            <div class="card">
+                <div class="card-header">
+                  Search Products
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <form method="POST" action="{% url 'search' %}">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="Search For Products" name="searched">
+
+                      </div>
+                      
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                    <br></br>
+                    </form>
+                    
+                </div>
+                
+              </div>
+            </div>
+            <br></br><br></br>
+            {% if searched %}
+                        {% for product in searched %}
+                            {{product}}<br>
+                        {% endfor %}
+                        <br></br><br></br>
+
+                    {% endif %}
 
         </center>
     </div>
 </div>
-<br></br>
+<br></br><br></br><br></br>
 
 {% endblock %} 

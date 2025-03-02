@@ -9,7 +9,14 @@ from django import forms
 
 
 def search(request):
-    return render(request,'search.html', {})
+    # Determine if they filled out the form
+    if request.method == 'POST':
+        searched  = request.POST['searched']
+        # Query the Products DB Model
+        searched = Product.objects.filter(name__icontains=searched)
+        return render(request,'search.html', {'searched':searched})
+    else:
+        return render(request,'search.html', {})
 
 def update_info(request):
     if request.user.is_authenticated:
