@@ -30,7 +30,12 @@ class Cart():
         if self.request.user.is_authenticated:
             #Get current profile
             current_user = Profile.objects.filter(user__id=self.request.user.id)
-            # 
+            # Convert {'3':1, '2':4} to {"3":1, "2":4}
+            carty = str(self.cart)
+            carty = carty.replace("\'", "\"")
+            # Save carty to Profile model
+            current_user.update(old_cart=str(carty))
+
 
     def cart_total(self):
         # Get product ids
