@@ -113,21 +113,23 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            # Do some shopping cart stuff
+            current_user = Profile.objects.get(user__id=request.user.id)
+            # Get their saved cart from db
+            saved_cart = current_user.old_cart
+            # Convert db str to dict
+            if saved_cart:
+                # Convert to dict using json
+                converted_cart = json.loads(saved_cart)
+                # Add loaded dict to session
+                # Get the cart
+                cart = Cart(request)
+                # Loop thrgh cart and add the items from the db
+                for key, value in converted_cart.items():
+                    cart.db_add(product=key, quantity=value)
             messages.success(request, ("You have been logged in."))
             return redirect('index')
-        # Do some shopping cart stuff
-        current_user = Profile.objects.get(user__id=request.id)
-        # Get their saved cart from db
-        saved_cart = current_user.old_cart
-        # Convert db str to dict
-        if saved_cart:
-            # Convert to dict using json
-            converted_cart = json.loads(saved_cart)
-            # Add loaded dict to session
-            # Get the cart
-            cart = Cart(request)
-            # Loop thrgh cart and add the items from the db
-
+        
         else:
             messages.success(request, ("There was an error please try again."))
             return redirect('login')
