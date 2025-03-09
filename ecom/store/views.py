@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
 from django.db.models import Q
+import json
+from cart.cart import Cart
 
 def search(request):
     # Determine if they filled out the form
@@ -113,6 +115,19 @@ def login_user(request):
             login(request, user)
             messages.success(request, ("You have been logged in."))
             return redirect('index')
+        # Do some shopping cart stuff
+        current_user = Profile.objects.get(user__id=request.id)
+        # Get their saved cart from db
+        saved_cart = current_user.old_cart
+        # Convert db str to dict
+        if saved_cart:
+            # Convert to dict using json
+            converted_cart = json.loads(saved_cart)
+            # Add loaded dict to session
+            # Get the cart
+            cart = Cart(request)
+            # Loop thrgh cart and add the items from the db
+
         else:
             messages.success(request, ("There was an error please try again."))
             return redirect('login')
