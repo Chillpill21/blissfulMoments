@@ -11,3 +11,10 @@ class ShippingAddress(models.Model):
     state = models.CharField(max_length=255, null=True, blank=True)
     zipcode = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=255)
+
+    # Don't pluralise address
+    class Meta:
+        verbose_name_plural = "Shipping Address"
+
+    def __str__(self):
+        return f'Shipping Address - {str(self.id)}'
