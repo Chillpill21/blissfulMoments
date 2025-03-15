@@ -20,7 +20,17 @@
                           Order Summary
                         </div>
                         <div class="card-body">
-                          Stuff
+                            {% for product in cart_products %}
+                            {{ product.name }}:
+                            {% if product.is_sale %}
+                                Rs. {{ product.sale_price }}
+                            {% else %}
+                                Rs. {{ product.price }}
+                            {% endif %}
+
+                            Quantity:
+                            
+                            {% endfor %}
                         </div>
                       </div>
                 </div>
