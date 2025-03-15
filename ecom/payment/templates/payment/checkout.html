@@ -27,10 +27,30 @@
                             {% else %}
                                 Rs. {{ product.price }}
                             {% endif %}
-
+                            <br>
+                            <small>
                             Quantity:
-                            
+                            {% for key, value in quantities.items %}
+                              <!-- sluggify converts string to integer -->
+                                {% if key == product.id|slugify %}  
+                                  {{ value }}
+                                {% endif %}
+                              {% endfor %}
+                            </small>
+                              <br><br>
                             {% endfor %}
+                            <strong>Total:</strong>  Rs. {{ totals }}
+                            <br><br>
+                            <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+                        </div>
+                      </div>
+                      <br><br>
+                      <div class="card">
+                        <div class="card-header">
+                          Shipping Info
+                        </div>
+                        <div class="card-body">
+                          {{ shipping_form.as_p }}
                         </div>
                       </div>
                 </div>
