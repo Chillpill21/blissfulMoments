@@ -11,7 +11,13 @@ def billing_info(request):
         cart_products = cart.get_prods
         quantities = cart.get_quants
         totals = cart.cart_total()
+        # Check to see if user is logged in
+        if request.user.is_authenticated:
+            return render(request, 'payment/billing_info.html', {"cart_products":cart_products, "quantities": quantities, "totals":totals, "shipping_info":request.POST})
+        else:
+            # Not logged in
 
+            pass
         shipping_form = request.POST
 
         return render(request, 'payment/billing_info.html', {"cart_products":cart_products, "quantities": quantities, "totals":totals, "shipping_form":shipping_form})
