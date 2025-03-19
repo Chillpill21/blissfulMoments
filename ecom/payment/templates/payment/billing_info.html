@@ -51,10 +51,28 @@
                         </div>
                         <div class="card-body">
                           
-                          {{ shipping_info }}
+                          Name: {{ shipping_info.shipping_full_name }}<br>
+                          Address 1: {{ shipping_info.shipping_address1 }}<br>
+                          Address 2: {{ shipping_info.shipping_address2 }}<br>
+                          City: {{ shipping_info.shipping_city }}<br>
+                          State:  {{ shipping_info.shipping_state }}<br>
+                          Zipcode: {{ shipping_info.shipping_zipcode }}<br>
+                          Country: {{ shipping_info.shipping_country }}<br>
+                          <br>
+                          <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
                         </div>
                       </div>
                       <br><br>
+                      <div class="card">
+                        <div class="card-header">
+                          Billing Info
+                        </div>
+                        <div class="card-body">
+                          
+                          
+                          <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
+                        </div>
+                      </div>
                       <a href="#" class="btn btn-secondary">Pay Now</a>
                     
                 </div>
