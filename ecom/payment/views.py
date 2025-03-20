@@ -5,6 +5,14 @@ from payment.models import ShippingAddress
 from django.contrib import messages
 # Create your views here.
 
+def process_order(request):
+    if request.POST:
+        # Get Billing Info from the last page
+        payment_form = PaymentForm(request.POST or None)
+    else:
+        messages.success(request, "Access Denied")
+        return redirect('index')
+
 def billing_info(request):
     if request.POST:
         cart = Cart(request)

@@ -5,8 +5,8 @@
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Billing Info</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Enter Your Payment Info...</p>
+                    <h1 class="display-4 fw-bolder">Processing Order</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Process your Order</p>
                 </div>
             </div>
         </header>
@@ -65,7 +65,7 @@
                       <br><br>
                       <div class="card">
                         <div class="card-header">
-                          <form method="POST" action="{% url 'process_' %}"></form>
+                          <form method="POST" action="{% url 'process_order' %}"></form>
                           {% csrf_token %}
                           Billing Info
                         </div>
