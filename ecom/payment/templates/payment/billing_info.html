@@ -65,7 +65,7 @@
                       <br><br>
                       <div class="card">
                         <div class="card-header">
-                          <form method="POST" action="{% url 'process_order' %}"></form>
+                          <form method="POST" action="{% url 'process_order' %}">
                           {% csrf_token %}
                           Billing Info
                         </div>
@@ -77,7 +77,7 @@
                       </div>
                       <br><br>
                       <button type="submit" class="btn btn-secondary">Pay Now</button>
-                    
+                    </form>
                 </div>
             </div>
         </div>

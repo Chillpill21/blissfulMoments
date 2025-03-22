@@ -9,6 +9,11 @@ def process_order(request):
     if request.POST:
         # Get Billing Info from the last page
         payment_form = PaymentForm(request.POST or None)
+        # Get Shipping Session Data
+        my_shipping = request.session.get('my_shipping')
+        
+        messages.success(request, "Order Placed!")
+        return redirect('index')
     else:
         messages.success(request, "Access Denied")
         return redirect('index')
@@ -19,6 +24,9 @@ def billing_info(request):
         cart_products = cart.get_prods
         quantities = cart.get_quants
         totals = cart.cart_total()
+        # Create a session with shipping info
+        my_shipping = request.POST
+        request.session['my_shipping'] = my_shipping
         # Check to see if user is logged in
         if request.user.is_authenticated:
             # Get the billing for
