@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from cart.cart import Cart
 from payment.forms import ShippingForm, PaymentForm
-from payment.models import ShippingAddress
+from payment.models import ShippingAddress, Order, OrderItem
+from django.contrib.auth.models import User
 from django.contrib import messages
 # Create your views here.
 
@@ -19,17 +20,28 @@ def process_order(request):
 
         # Gather order info
         full_name = my_shipping['shipping_full_name']
-        email = my_shipping['shipping_email']
         # Create Shipping Address from session info
         shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_state']}\n{my_shipping['shipping_zipcode']}\n{my_shipping['shipping_country']}"
         amount_paid = totals
 
-
+        # Create an Order
         if request.user.is_authenticated:
             # logged in
             user = request.user
-        messages.success(request, "Order Placed!")
-        return redirect('index')
+            # Create Order
+            create_order = Order(user=user, full_name=full_name, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order.save()
+            messages.success(request, "Order Placed!")
+            return redirect('index')
+        else:
+            # not logged in
+            # Create Order
+            create_order = Order(full_name=full_name, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order.save()
+            messages.success(request, "Order Placed!")
+            return redirect('index')
+
+        
     else:
         messages.success(request, "Access Denied")
         return redirect('index')
