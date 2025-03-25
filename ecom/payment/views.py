@@ -4,6 +4,7 @@ from payment.forms import ShippingForm, PaymentForm
 from payment.models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
+from store.models import Product
 # Create your views here.
 
 def process_order(request):
@@ -31,6 +32,14 @@ def process_order(request):
             # Create Order
             create_order = Order(user=user, full_name=full_name, shipping_address=shipping_address, amount_paid=amount_paid)
             create_order.save()
+
+            # Add order items
+            # Get the order ID
+            order_id = create_order.pk
+            # Get product info
+            for product in cart_products():
+                # Get product ID
+                product_id = product.id
             messages.success(request, "Order Placed!")
             return redirect('index')
         else:
