@@ -40,6 +40,16 @@ def process_order(request):
             for product in cart_products():
                 # Get product ID
                 product_id = product.id
+                # Get product price
+                if product.is_sale:
+                    price = product.sale_price
+                else:
+                    price = product.price
+                # Get quantity
+                for key,value in quantities().items():
+                    if int(key) == product.id:
+                        # Create order item
+                        create_order_item = OrderItem(order_id=order_id, product_id=product_id, user=user, quantity=value, price=price)
             messages.success(request, "Order Placed!")
             return redirect('index')
         else:
