@@ -11,9 +11,12 @@ admin.site.register(OrderItem)
 # Create an OrderItem Inline
 class OrderItemInline(admin.StackedInline):
     model = OrderItem
+    extra = 0
 # Extend our Order Model
 class OrderAdmin(admin.ModelAdmin):
     model = Order
+    readonly_fields = ["date_ordered"]
+    fields = ["user", "full_name", "shipping_address", "amount_paid", "date_ordered", "shipped"]
     inlines = [OrderItemInline]
 
 # Unregister Order Model
