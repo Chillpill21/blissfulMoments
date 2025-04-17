@@ -9,7 +9,11 @@ from store.models import Product
 
 def orders(request):
     if request.user.is_authenticated and request.user.is_superuser: 
-        return render(request, 'payment/not_shipped_dash.html', {"orders":orders})
+        return render(request, 'payment/orders.html', {"orders":orders})
+    else:
+        messages.success(request, "Access Denied")
+        return redirect('index')
+
 
 def not_shipped_dash(request):
     if request.user.is_authenticated and request.user.is_superuser:
