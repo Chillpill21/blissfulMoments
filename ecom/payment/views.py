@@ -7,6 +7,10 @@ from django.contrib import messages
 from store.models import Product
 # Create your views here.
 
+def orders(request):
+    if request.user.is_authenticated and request.user.is_superuser: 
+        return render(request, 'payment/not_shipped_dash.html', {"orders":orders})
+
 def not_shipped_dash(request):
     if request.user.is_authenticated and request.user.is_superuser:
         orders = Order.objects.filter(shipped=False)      
@@ -17,7 +21,7 @@ def not_shipped_dash(request):
 
 def shipped_dash(request):
     if request.user.is_authenticated and request.user.is_superuser: 
-        orders = Order.objects.filter(shipped=False)      
+        orders = Order.objects.filter(shipped=True)      
         return render(request, 'payment/shipped_dash.html', {"orders":orders})
     else:
         messages.success(request, "Access Denied")
@@ -37,6 +41,7 @@ def process_order(request):
 
         # Gather order info
         full_name = my_shipping['shipping_full_name']
+        email = my_shipping['shipping_email']
         # Create Shipping Address from session info
         shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_state']}\n{my_shipping['shipping_zipcode']}\n{my_shipping['shipping_country']}"
         amount_paid = totals
@@ -46,7 +51,7 @@ def process_order(request):
             # logged in
             user = request.user
             # Create Order
-            create_order = Order(user=user, full_name=full_name, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order = Order(user=user, full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
             create_order.save()
 
             # Add order items
@@ -77,7 +82,7 @@ def process_order(request):
         else:
             # not logged in
             # Create Order
-            create_order = Order(full_name=full_name, shipping_address=shipping_address, amount_paid=amount_paid)
+            create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address, amount_paid=amount_paid)
             create_order.save()
             # Add order items
             # Get the order ID
@@ -142,7 +147,10 @@ def checkout(request):
     totals = cart.cart_total()
     if request.user.is_authenticated:
         # Checkout as logged in user
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+        try:
+            shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+        except:
+            shipping_user = None
         shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
         return render(request, 'payment/checkout.html', {"cart_products":cart_products, "quantities": quantities, "totals":totals, "shipping_form":shipping_form})
     else:
