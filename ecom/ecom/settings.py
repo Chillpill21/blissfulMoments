@@ -75,8 +75,8 @@ DATABASES = {
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
+        'HOST': 'metro.proxy.rlwy.net',
+        'PORT': '12357',
     }
 }
 
