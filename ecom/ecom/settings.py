@@ -15,8 +15,8 @@ SECRET_KEY = 'django-insecure-%-hxr11lrsr@=h%)*n)-yarly)69yk29_6hb%y$chown$32u+b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blissfulmoments-production.up.railway.app', 'https://blissfulmoments-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['blissfulmoments-production.up.railway.app', 'https://blissfulmoments-production.up.railway.app']
+ALLOWED_HOSTS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
 
 
 # Application definition
@@ -77,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': 'metro.proxy.rlwy.net',
         'PORT': '12357',
     }
