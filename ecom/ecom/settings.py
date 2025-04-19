@@ -15,8 +15,8 @@ SECRET_KEY = 'django-insecure-%-hxr11lrsr@=h%)*n)-yarly)69yk29_6hb%y$chown$32u+b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS = []
+ALLOWED_HOSTS = ['blissfulmoments-production.up.railway.app', 'https://blissfulmoments-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['blissfulmoments-production.up.railway.app', 'https://blissfulmoments-production.up.railway.app']
 
 
 # Application definition
