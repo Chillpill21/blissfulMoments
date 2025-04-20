@@ -15,8 +15,8 @@ SECRET_KEY = 'django-insecure-%-hxr11lrsr@=h%)*n)-yarly)69yk29_6hb%y$chown$32u+b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','.now.sh']
+CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
