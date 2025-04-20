@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "ecom/ecom/wsgi.py",
+        "src": "ecom/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.2" }
       },
@@ -21,7 +21,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "ecom/ecom/wsgi.py"
+        "dest": "ecom/wsgi.py"
       }
     ]
   }
