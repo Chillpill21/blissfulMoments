@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,13 +11,13 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%-hxr11lrsr@=h%)*n)-yarly)69yk29_6hb%y$chown$32u+b'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['blissfulmoments-production-66fd.up.railway.app', 'https://blissfulmoments-production-66fd.up.railway.app']
+ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
 
 # Application definition
@@ -72,17 +73,18 @@ WSGI_APPLICATION = 'ecom.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'metro.proxy.rlwy.net',
-        'PORT': '12357',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'railway',
+        # 'USER': 'postgres',
+        # 'PASSWORD': os.environ['DB_PASSWORD'],
+        # 'HOST': 'metro.proxy.rlwy.net',
+        # 'PORT': '12357',
     }
 }
 
+DATABASES['default'] = dj_database_url.parse("postgresql://blissful_moments_db_user:nLsV5a8eoB92SsAlzPmCPm4RQk5DMdtX@dpg-d16qla6mcj7s73cftjhg-a.oregon-postgres.render.com/blissful_moments_db")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
