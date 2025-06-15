@@ -11,10 +11,10 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 CSRF_TRUSTED_ORIGINS = []
@@ -84,7 +84,8 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse("postgresql://blissful_moments_db_user:nLsV5a8eoB92SsAlzPmCPm4RQk5DMdtX@dpg-d16qla6mcj7s73cftjhg-a.oregon-postgres.render.com/blissful_moments_db")
+database_url = os.environ["DATABASE_URL"]
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
